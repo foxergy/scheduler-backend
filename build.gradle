@@ -1,0 +1,40 @@
+plugins {
+    id 'idea'
+    id 'java'
+    id 'com.gradle.build-scan' version '2.3'
+    id 'org.springframework.boot' version '2.1.5.RELEASE'
+}
+group 'de.thb.mux'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.11
+
+repositories {
+    mavenCentral()
+}
+
+bootJar {
+    mainClassName = 'de.thb.mux.Application'
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-dependencies:2.1.5.RELEASE'
+    implementation 'org.springframework.boot:spring-boot-starter-web:2.1.5.RELEASE'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.1.5.RELEASE'
+    implementation 'com.h2database:h2:1.4.199'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.8'
+    components {
+        withModule('org.springframework:spring-beans') {
+            allVariants {
+                withDependencyConstraints {
+                    // Need to patch constraints because snakeyaml is an optional dependency
+                    it.findAll { it.name == 'snakeyaml' }.each { it.version { strictly '1.23' } }
+                }
+            }
+        }
+    }
+}

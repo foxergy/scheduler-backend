@@ -1,0 +1,9 @@
+#ignore generated gradle folders
+.gradle/
+gradle/
+
+.idea/
+
+#If someone uses a gradle wrapper -> ignore the execution files
+gradlew
+gradlew.bat
