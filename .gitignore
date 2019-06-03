@@ -3,6 +3,7 @@
 gradle/
 
 .idea/
+.out/
 
 #If someone uses a gradle wrapper -> ignore the execution files
 gradlew

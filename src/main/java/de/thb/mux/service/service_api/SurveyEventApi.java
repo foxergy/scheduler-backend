@@ -1,6 +1,6 @@
-package de.thb.mux.authentication.service.service_api;
+package de.thb.mux.service.service_api;
 
-import de.thb.mux.authentication.model.SurveyEvent;
+import de.thb.mux.domain.SurveyEvent;
 
 public interface SurveyEventApi extends CrudServiceApi<SurveyEvent, Long> {
 }

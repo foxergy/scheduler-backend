@@ -1,0 +1,1 @@
+MERGE INTO survey_event VALUES(1, 'TestEvent', 'This is an event, that is made for a test')

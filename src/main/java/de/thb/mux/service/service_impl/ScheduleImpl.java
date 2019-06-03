@@ -1,10 +1,11 @@
-package de.thb.mux.serviceImpl;
+package de.thb.mux.service.service_impl;
 
-import de.thb.mux.dataaccess.ScheduleRepository;
+import de.thb.mux.data_access.ScheduleRepository;
 import de.thb.mux.domain.Schedule;
-import de.thb.mux.serviceApi.ScheduleApi;
+import de.thb.mux.service.service_api.ScheduleApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import javax.persistence.EntityNotFoundException;
 import java.util.Collection;
 
@@ -12,7 +13,7 @@ import java.util.Collection;
 public class ScheduleImpl implements ScheduleApi {
 
     @Autowired
-    ScheduleRepository scheduleRepository;
+    private ScheduleRepository scheduleRepository;
 
     @Override
     public Collection<Schedule> findAll() {
@@ -39,7 +40,7 @@ public class ScheduleImpl implements ScheduleApi {
     }
 
     @Override
-    public boolean deleteById(Long id) throws EntityNotFoundException {
+    public Boolean deleteById(Long id) throws EntityNotFoundException {
         if(!exists(id)) {
             throw new EntityNotFoundException("Schedule "+id+" does not exist");
         }else {
@@ -49,17 +50,7 @@ public class ScheduleImpl implements ScheduleApi {
     }
 
     @Override
-    public boolean delete(Schedule schedule) throws EntityNotFoundException {
-        if(!exists(schedule.getId())) {
-            throw new EntityNotFoundException("Schedule "+schedule.getId()+" does not exist");
-        }else {
-            scheduleRepository.deleteById(schedule.getId());
-            return findByID(schedule.getId())==null;
-        }
-    }
-
-    @Override
-    public boolean exists(Long id) {
+    public Boolean exists(Long id) {
         return findByID(id)!=null;
     }
 

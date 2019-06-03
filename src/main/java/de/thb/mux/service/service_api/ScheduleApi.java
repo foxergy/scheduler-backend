@@ -1,6 +1,6 @@
-package de.thb.mux.serviceApi;
+package de.thb.mux.service.service_api;
 
 import de.thb.mux.domain.Schedule;
 
-public interface ScheduleApi extends ParentApi<Long, Schedule> {
+public interface ScheduleApi extends CrudServiceApi<Schedule, Long> {
 }

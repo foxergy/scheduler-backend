@@ -1,4 +1,4 @@
-package de.thb.mux.dataaccess;
+package de.thb.mux.data_access;
 
 import de.thb.mux.domain.SurveyUser;
 import org.springframework.data.jpa.repository.JpaRepository;

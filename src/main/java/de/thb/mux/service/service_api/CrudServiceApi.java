@@ -1,4 +1,4 @@
-package de.thb.mux.authentication.service.service_api;
+package de.thb.mux.service.service_api;
 
 import java.util.Collection;
 
@@ -8,13 +8,13 @@ public interface CrudServiceApi <T, ID> {
 
     Collection<T> findAll();
 
-    T findOneById(ID id);
+    T findByID(ID id);
 
     T update(T t);
 
     Boolean deleteById(ID id);
 
     default Boolean exists(ID id) {
-        return findOneById(id) != null;
+        return findByID(id) != null;
     }
 }

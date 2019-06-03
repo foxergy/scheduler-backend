@@ -1,9 +1,9 @@
-package de.thb.mux.serviceImpl;
+package de.thb.mux.service.service_impl;
 
 
-import de.thb.mux.dataaccess.SurveyUserRepository;
+import de.thb.mux.data_access.SurveyUserRepository;
 import de.thb.mux.domain.SurveyUser;
-import de.thb.mux.serviceApi.SurveyUserApi;
+import de.thb.mux.service.service_api.SurveyUserApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +14,7 @@ import java.util.Collection;
 public class SurveyUserImpl implements SurveyUserApi {
 
     @Autowired
-    SurveyUserRepository surveyUserRepository;
+    private SurveyUserRepository surveyUserRepository;
 
     @Override
     public Collection<SurveyUser> findAll() {
@@ -22,8 +22,8 @@ public class SurveyUserImpl implements SurveyUserApi {
     }
 
     @Override
-    public SurveyUser findByID(Long aLong) {
-        return null;
+    public SurveyUser findByID(Long id) {
+        return surveyUserRepository.getOne(id);
     }
 
     @Override
@@ -33,21 +33,20 @@ public class SurveyUserImpl implements SurveyUserApi {
 
     @Override
     public SurveyUser update(SurveyUser surveyUser) throws EntityNotFoundException {
-        return null;
+        if (!exists(surveyUser.getId())) {
+            throw new EntityNotFoundException("SurveyUser with id: " + surveyUser.getId() + " not found");
+        } else {
+            return surveyUserRepository.save(surveyUser);
+        }
     }
 
     @Override
-    public boolean deleteById(Long aLong) throws EntityNotFoundException {
-        return false;
-    }
-
-    @Override
-    public boolean delete(SurveyUser surveyUser) throws EntityNotFoundException {
-        return false;
-    }
-
-    @Override
-    public boolean exists(Long aLong) {
-        return false;
+    public Boolean deleteById(Long id) throws EntityNotFoundException {
+        if (!exists(id)) {
+            throw new EntityNotFoundException("SurveyUser " + id + " does not exist");
+        } else {
+            surveyUserRepository.deleteById(id);
+            return findByID(id) == null;
+        }
     }
 }

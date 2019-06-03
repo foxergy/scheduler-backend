@@ -1,8 +1,6 @@
 package de.thb.mux.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import de.thb.mux.authentication.model.SurveyEvent;
-import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

@@ -1,7 +1,7 @@
-package de.thb.mux.webApi;
+package de.thb.mux.web_api;
 
 import de.thb.mux.domain.SurveyEvent;
-import de.thb.mux.serviceApi.SurveyEventApi;
+import de.thb.mux.service.service_api.SurveyEventApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,7 +42,7 @@ public class SurveyEventController {
     @PutMapping(value= "",
             consumes = "application/json",
             produces = "application/json")
-    public ResponseEntity putSurveyEvents( @RequestBody SurveyEvent surveyEvent){
+    public ResponseEntity putSurveyEvents(@RequestBody SurveyEvent surveyEvent){
         try {
             surveyEvent.getUser().forEach(user -> {
                 user.setSurveyEvent(surveyEvent);

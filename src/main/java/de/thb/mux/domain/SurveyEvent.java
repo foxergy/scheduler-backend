@@ -1,16 +1,6 @@
-package de.thb.mux.authentication.model;
+package de.thb.mux.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import javax.persistence.*;
-import java.util.Set;
-
-public class SurveyEvent {
-
-    package de.thb.mux.domain;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import javax.persistence.*;
 import java.util.Set;
 
@@ -91,5 +81,3 @@ import java.util.Set;
             this.user = user;
         }
     }
-
-}
