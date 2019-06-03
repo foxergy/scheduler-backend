@@ -3,9 +3,11 @@
 gradle/
 
 .idea/
-.out/
-.out/*
-.out/**
+out/
+out/*
+out/**
+
+src/main/resources/H2/schedulerDB.mv.db
 
 #If someone uses a gradle wrapper -> ignore the execution files
 gradlew
