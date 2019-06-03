@@ -9,8 +9,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 @Service
-public class UserDetailsDetailsImpl implements UserDetailsService {
+public class UserDetailsImpl implements UserDetailsService {
 
     @Autowired
     private UserAccessRepository userAccessRepository;
@@ -22,5 +25,14 @@ public class UserDetailsDetailsImpl implements UserDetailsService {
             throw new UsernameNotFoundException(username);
         }
         return new UserPrincipal(userAccess);
+    }
+
+    public Collection<UserDetails> findAll(){
+        Collection<UserAccess> accessCollection = userAccessRepository.findAll();
+        Collection<UserDetails> userDetailsCollection = new ArrayList<>();
+        accessCollection.forEach(userAccess ->{
+            (userDetailsCollection).add(new UserPrincipal(userAccess));
+        });
+        return userDetailsCollection;
     }
 }
