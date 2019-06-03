@@ -1,1 +1,0 @@
-MERGE INTO survey_user VALUES(1, 'kindsmueller', 1);

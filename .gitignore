@@ -4,6 +4,8 @@ gradle/
 
 .idea/
 .out/
+.out/*
+.out/**
 
 #If someone uses a gradle wrapper -> ignore the execution files
 gradlew
