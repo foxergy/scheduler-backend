@@ -1,11 +1,6 @@
 package de.thb.mux.domain.security;
 
-import de.thb.mux.domain.Schedule;
-import de.thb.mux.domain.SurveyEvent;
-
 import javax.persistence.*;
-import javax.persistence.Id;
-import java.util.Set;
 
 @Entity
 public class UserAccess {
