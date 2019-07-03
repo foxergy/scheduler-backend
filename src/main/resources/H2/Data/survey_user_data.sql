@@ -1,1 +1,1 @@
-MERGE INTO survey_user VALUES(1, 'kindsmueller', 1);
+MERGE INTO survey_user VALUES(1, 'kindsmueller', 'testUUID-a-UUID-is-50-char-long');

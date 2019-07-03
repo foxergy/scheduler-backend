@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface SurveyEventRepository extends JpaRepository<SurveyEvent, Long> {
+public interface SurveyEventRepository extends JpaRepository<SurveyEvent, String> {
 }

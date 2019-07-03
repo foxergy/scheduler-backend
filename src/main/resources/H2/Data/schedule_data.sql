@@ -1,1 +1,1 @@
-MERGE INTO schedule VALUES(1, '2018-12-04T13:34:00.000', 1, 1)
+MERGE INTO schedule VALUES(1, '2018-12-04T13:34:00.000', 'testUUID-a-UUID-is-50-char-long', 1)

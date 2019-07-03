@@ -1,16 +1,18 @@
 package de.thb.mux.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import de.thb.mux.service.service_impl.UUIDService;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.persistence.*;
 import java.util.Set;
 
     @Entity
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     public class SurveyEvent {
+
         @Id
-        @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="survey_event_generator")
-        @SequenceGenerator(name="survey_event_generator", sequenceName = "survey_event_seq", initialValue = 1, allocationSize = 1)
-        private Long id;
+        private String id;
 
         private String name;
         private String description;
@@ -23,29 +25,32 @@ import java.util.Set;
 
         public SurveyEvent(){}
 
-        public SurveyEvent(Long id, String name, String description, Set<Schedule> schedules, Set<SurveyUser> surveyUsers) {
+        public SurveyEvent(String id, String name, String description, Set<Schedule> schedules, Set<SurveyUser> surveyUsers) {
+            this.id = id;
             this.name = name;
             this.description = description;
             this.schedules = schedules;
             this.user=surveyUsers;
         }
 
-        public SurveyEvent(Long id, String name, String description, Set<Schedule> schedules) {
+        public SurveyEvent(String id, String name, String description, Set<Schedule> schedules) {
+            this.id = id;
             this.name = name;
             this.description = description;
             this.schedules = schedules;
         }
 
-        public SurveyEvent(Long id, String name, String description) {
+        public SurveyEvent(String id, String name, String description) {
+            this.id = id;
             this.name = name;
             this.description = description;
         }
 
-        public Long getId() {
+        public String getId() {
             return id;
         }
 
-        public void setId(Long id) {
+        public void setId(String id) {
             this.id = id;
         }
 

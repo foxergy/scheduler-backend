@@ -2,6 +2,7 @@ package de.thb.mux.web_api;
 
 import de.thb.mux.domain.SurveyEvent;
 import de.thb.mux.service.service_api.SurveyEventApi;
+import de.thb.mux.service.service_impl.UUIDService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,8 @@ public class SurveyEventController {
 
     @Autowired
     private SurveyEventApi surveyEventApi;
+    @Autowired
+    private UUIDService uuidService;
 
     @GetMapping(
             produces = "application/json")
@@ -26,7 +29,7 @@ public class SurveyEventController {
 
     @GetMapping(value="/{id}",
             produces = "application/json")
-    public ResponseEntity<SurveyEvent> getSurveyEvent(@PathVariable("id")Long id) {
+    public ResponseEntity<SurveyEvent> getSurveyEvent(@PathVariable("id")String id) {
         return new ResponseEntity<>(surveyEventApi.findByID(id), HttpStatus.OK);
     }
 
@@ -34,6 +37,7 @@ public class SurveyEventController {
             consumes = "application/json",
             produces = "application/json")
     public ResponseEntity postSurveyEvents(@RequestBody SurveyEvent surveyEvent){
+        surveyEvent.setId(uuidService.generateUUID());
             surveyEvent.getSchedules().forEach(schedule -> schedule.setSurveyEvent(surveyEvent));
             surveyEventApi.create(surveyEvent);
             return new ResponseEntity(HttpStatus.CREATED);
@@ -58,7 +62,7 @@ public class SurveyEventController {
     }
 
     @DeleteMapping(value="/{id}")
-    public ResponseEntity deleteSurveyEvent(@PathVariable("id")Long id){
+    public ResponseEntity deleteSurveyEvent(@PathVariable("id")String id){
         try{
             surveyEventApi.deleteById(id);
             return new ResponseEntity(HttpStatus.OK);

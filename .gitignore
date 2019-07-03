@@ -8,6 +8,8 @@ out/*
 out/**
 
 src/main/resources/H2/schedulerDB.mv.db
+src7main/resources/images/*
+src7main/resources/images/**
 
 #If someone uses a gradle wrapper -> ignore the execution files
 gradlew

@@ -26,7 +26,7 @@ public class SurveyEventImpl implements SurveyEventApi {
     }
 
     @Override
-    public SurveyEvent findByID(Long id) {
+    public SurveyEvent findByID(String id) {
         return surveyEventRepository.getOne(id);
     }
 
@@ -40,7 +40,7 @@ public class SurveyEventImpl implements SurveyEventApi {
     }
 
     @Override
-    public Boolean deleteById(Long id) {
+    public Boolean deleteById(String id) {
         if(!exists(id)) {
             throw new EntityNotFoundException("Surveyevent "+id+" does not exist");
         }else {
