@@ -12,8 +12,8 @@ import javax.persistence.EntityNotFoundException;
 import java.util.Collection;
 
 @RestController
-@RequestMapping(value = "/surveyEvent")
 @CrossOrigin(origins = "*")
+@RequestMapping(value = "/surveyEvent")
 public class SurveyEventController {
 
     @Autowired
@@ -23,6 +23,7 @@ public class SurveyEventController {
 
     @GetMapping(
             produces = "application/json")
+    @CrossOrigin(origins = "*")
     public ResponseEntity<Collection<SurveyEvent>> getAllSurveyEvents(){
         return new ResponseEntity<>(surveyEventApi.findAll(), HttpStatus.OK);
     }

@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
 
 @RestController
-@RequestMapping(value = "/surveyUser")
 @CrossOrigin(origins = "*")
+@RequestMapping(value = "/surveyUser")
 public class SurveyUserController {
 
     @Autowired
