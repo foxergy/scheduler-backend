@@ -28,6 +28,8 @@ dependencies {
     implementation 'org.springframework.security:spring-security-core:5.1.5.RELEASE'
     implementation 'org.springframework.security:spring-security-config:5.1.5.RELEASE'
     implementation 'org.springframework.security:spring-security-web:5.1.5.RELEASE'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '2.1.5.RELEASE'
+    implementation 'javax.mail:mail:1.4.7'
 
     implementation 'com.h2database:h2:1.4.199'
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.8'

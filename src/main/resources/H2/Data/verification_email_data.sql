@@ -1,0 +1,1 @@
+MERGE INTO verification_email VALUES('name@domain.de', 'Mustermann', 12345)
