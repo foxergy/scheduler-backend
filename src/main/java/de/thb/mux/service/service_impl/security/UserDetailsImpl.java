@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.naming.NameAlreadyBoundException;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -39,8 +40,12 @@ public class UserDetailsImpl implements UserDetailsService {
         return userDetailsCollection;
     }
 
-    public UserDetails createUserDetails(UserAccess userAccess){
-        userAccess.setPassword(passwordEncoder.encode(userAccess.getPassword()));
-        return new UserPrincipal(userAccessRepository.save(userAccess));
+    public UserDetails createUserDetails(UserAccess userAccess) throws NameAlreadyBoundException {
+        if(userAccessRepository.findByUsername(userAccess.getUsername())==null) {
+            userAccess.setPassword(passwordEncoder.encode(userAccess.getPassword()));
+            return new UserPrincipal(userAccessRepository.save(userAccess));
+        }else{
+            throw new NameAlreadyBoundException("a");
+        }
     }
 }

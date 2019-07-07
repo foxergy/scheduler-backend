@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.persistence.EntityNotFoundException;
 import java.util.Collection;
 
-@RestController
 @CrossOrigin(origins = "*")
+@RestController
 @RequestMapping(value = "/surveyEvent")
 public class SurveyEventController {
 
@@ -23,7 +23,7 @@ public class SurveyEventController {
 
     @GetMapping(
             produces = "application/json")
-    public ResponseEntity<Collection<SurveyEvent>> getAllSurveyEvents(){
+     public ResponseEntity<Collection<SurveyEvent>> getAllSurveyEvents(){
         return new ResponseEntity<>(surveyEventApi.findAll(), HttpStatus.OK);
     }
 

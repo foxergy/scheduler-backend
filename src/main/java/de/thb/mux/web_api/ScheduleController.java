@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.persistence.EntityNotFoundException;
 import java.util.Collection;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "/schedule")
-@CrossOrigin(origins = "*")
 public class ScheduleController {
 
     @Autowired

@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 
-@RestController
 @CrossOrigin(origins = "*")
+@RestController
 @RequestMapping(value = "/surveyUser")
 public class SurveyUserController {
 

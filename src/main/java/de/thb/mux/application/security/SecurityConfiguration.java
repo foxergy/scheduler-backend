@@ -12,6 +12,11 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
@@ -22,18 +27,19 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception{
-        http.
-                authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/user/register").permitAll()
+        http
+                .headers().frameOptions().sameOrigin()
+                .and()
+                .cors()
+                .and()
+                .authorizeRequests().antMatchers(HttpMethod.POST, "/user/register**").permitAll()
                 .and()
                 .httpBasic()
                 .and()
-                .authorizeRequests()
-                .antMatchers("/**").authenticated()
+                .authorizeRequests().anyRequest().authenticated()
                 .and()
                 .csrf().disable();
-        http.headers().frameOptions().sameOrigin();
-        http.cors();
+
     }
 
     @Override
