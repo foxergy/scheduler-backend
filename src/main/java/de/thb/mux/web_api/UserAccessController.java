@@ -2,9 +2,6 @@ package de.thb.mux.web_api;
 
 import de.thb.mux.domain.security.UserAccess;
 import de.thb.mux.service.service_impl.security.UserDetailsImpl;
-import org.hibernate.NonUniqueResultException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +14,6 @@ import javax.naming.NameAlreadyBoundException;
 @RequestMapping(value = "/user")
 public class UserAccessController {
 
-    Logger log = LoggerFactory.getLogger(UserAccessController.class);
     @Autowired
     private UserDetailsImpl userDetailsService;
 

@@ -1,8 +1,6 @@
 package de.thb.mux.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import de.thb.mux.service.service_impl.UUIDService;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.util.Set;

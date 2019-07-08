@@ -13,7 +13,10 @@ public class Schedule {
     @SequenceGenerator(name="schedule_generator", sequenceName = "schedule_seq", initialValue = 1, allocationSize = 1)
     private Long id;
 
-    private LocalDateTime time;
+    private LocalDateTime startTime;
+
+    private LocalDateTime endTime;
+
 
     @ManyToOne
     @JoinColumn(name = "survey_event_id")
@@ -25,19 +28,22 @@ public class Schedule {
 
     public Schedule(){}
 
-    public Schedule(Long id, LocalDateTime time, SurveyEvent surveyEvent, SurveyUser surveyUser) {
-        this.time = time;
+    public Schedule(Long id, LocalDateTime startTime, LocalDateTime endTime, SurveyEvent surveyEvent, SurveyUser surveyUser) {
+        this.endTime = endTime;
+        this.startTime = startTime;
         this.surveyEvent = surveyEvent;
         this.surveyUser = surveyUser;
     }
 
-    public Schedule(Long id, LocalDateTime time, SurveyEvent surveyEvent) {
-        this.time = time;
+    public Schedule(Long id, LocalDateTime startTime, LocalDateTime endTime, SurveyEvent surveyEvent) {
+        this.endTime = endTime;
+        this.startTime = startTime;
         this.surveyEvent = surveyEvent;
     }
 
-    public Schedule(Long id, LocalDateTime time) {
-        this.time = time;
+    public Schedule(Long id, LocalDateTime startTime, LocalDateTime endTime) {
+        this.endTime = endTime;
+        this.startTime = startTime;
     }
 
     public Long getId() {
@@ -48,12 +54,20 @@ public class Schedule {
         this.id = id;
     }
 
-    public LocalDateTime getTime() {
-        return time;
+    public LocalDateTime getStartTime() {
+        return startTime;
     }
 
-    public void setTime(LocalDateTime time) {
-        this.time = time;
+    public void setStartTime(LocalDateTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public LocalDateTime getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(LocalDateTime endTime) {
+        this.endTime = endTime;
     }
 
     public SurveyEvent getSurveyEvent() {
