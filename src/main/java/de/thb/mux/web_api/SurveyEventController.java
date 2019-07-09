@@ -44,13 +44,15 @@ public class SurveyEventController {
         return new ResponseEntity<>(surveyEventApi.findSurveyEventByUsername(user), HttpStatus.OK);
     }
 
-    @PostMapping(value = "",
+    @PostMapping(value = "/user/{username}",
             consumes = "application/json",
-            produces = "application/json")
-    public ResponseEntity<String> postSurveyEvents(@RequestBody SurveyEvent surveyEvent){
-            surveyEvent.setId(uuidService.generateUUID());
-            surveyEvent.getSchedules().forEach(schedule -> schedule.setSurveyEvent(surveyEvent));
-            surveyEventApi.create(surveyEvent);
+            produces = "text/plain")
+    public ResponseEntity<String> postSurveyEvents(@RequestBody SurveyEvent surveyEvent, @PathVariable("username")String username){
+        UserAccess user = userDetailsService.loadUserAccessByUsername(username);
+        surveyEvent.setId(uuidService.generateUUID());
+        surveyEvent.getSchedules().forEach(schedule -> schedule.setSurveyEvent(surveyEvent));
+        surveyEvent.setUsername(user);
+        surveyEventApi.create(surveyEvent);
             return new ResponseEntity<>(surveyEvent.getId(), HttpStatus.CREATED);
     }
 
