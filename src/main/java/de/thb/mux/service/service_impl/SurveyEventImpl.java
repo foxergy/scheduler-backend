@@ -2,6 +2,7 @@ package de.thb.mux.service.service_impl;
 
 import de.thb.mux.data_access.SurveyEventRepository;
 import de.thb.mux.domain.SurveyEvent;
+import de.thb.mux.domain.security.UserAccess;
 import de.thb.mux.service.service_api.SurveyEventApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ public class SurveyEventImpl implements SurveyEventApi {
 
     @Override
     public SurveyEvent create(SurveyEvent surveyEvent) {
+
         return surveyEventRepository.save(surveyEvent);
     }
 
@@ -47,5 +49,10 @@ public class SurveyEventImpl implements SurveyEventApi {
             surveyEventRepository.deleteById(id);
             return findByID(id)==null;
         }
+    }
+
+    @Override
+    public Collection<SurveyEvent> findSurveyEventByUsername(UserAccess username) {
+        return surveyEventRepository.findByUsername(username);
     }
 }

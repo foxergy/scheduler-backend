@@ -31,6 +31,14 @@ public class UserDetailsImpl implements UserDetailsService {
         return new UserPrincipal(userAccess);
     }
 
+    public UserAccess loadUserAccessByUsername(String username) throws UsernameNotFoundException {
+        UserAccess userAccess = userAccessRepository.findByUsername(username);
+        if(userAccess == null){
+            throw new UsernameNotFoundException(username);
+        }
+        return userAccess;
+    }
+
     public Collection<UserDetails> findAll(){
         Collection<UserAccess> accessCollection = userAccessRepository.findAll();
         Collection<UserDetails> userDetailsCollection = new ArrayList<>();
@@ -48,4 +56,5 @@ public class UserDetailsImpl implements UserDetailsService {
             throw new NameAlreadyBoundException("a");
         }
     }
+
 }

@@ -1,1 +1,1 @@
-MERGE INTO survey_event VALUES('testUUID-a-UUID-is-50-char-long', 'TestEvent', 'This is an event, that is made for a test')
+MERGE INTO survey_event VALUES('testUUID-a-UUID-is-50-char-long', 'TestEvent', 'This is an event, that is made for a test', 'mueller')

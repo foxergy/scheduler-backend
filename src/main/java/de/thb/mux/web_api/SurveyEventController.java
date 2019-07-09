@@ -1,8 +1,10 @@
 package de.thb.mux.web_api;
 
 import de.thb.mux.domain.SurveyEvent;
+import de.thb.mux.domain.security.UserAccess;
 import de.thb.mux.service.service_api.SurveyEventApi;
 import de.thb.mux.service.service_impl.UUIDService;
+import de.thb.mux.service.service_impl.security.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +22,8 @@ public class SurveyEventController {
     private SurveyEventApi surveyEventApi;
     @Autowired
     private UUIDService uuidService;
+    @Autowired
+    private UserDetailsImpl userDetailsService;
 
     @GetMapping(
             produces = "application/json")
@@ -33,11 +37,18 @@ public class SurveyEventController {
         return new ResponseEntity<>(surveyEventApi.findByID(id), HttpStatus.OK);
     }
 
+    @GetMapping(value="/user/{username}",
+            produces = "application/json")
+    public ResponseEntity<Collection<SurveyEvent>> getSurveyEventByUserID(@PathVariable("username")String username) {
+        UserAccess user = userDetailsService.loadUserAccessByUsername(username);
+        return new ResponseEntity<>(surveyEventApi.findSurveyEventByUsername(user), HttpStatus.OK);
+    }
+
     @PostMapping(value = "",
             consumes = "application/json",
             produces = "application/json")
     public ResponseEntity postSurveyEvents(@RequestBody SurveyEvent surveyEvent){
-        surveyEvent.setId(uuidService.generateUUID());
+            surveyEvent.setId(uuidService.generateUUID());
             surveyEvent.getSchedules().forEach(schedule -> schedule.setSurveyEvent(surveyEvent));
             surveyEventApi.create(surveyEvent);
             return new ResponseEntity(HttpStatus.CREATED);

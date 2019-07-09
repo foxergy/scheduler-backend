@@ -1,12 +1,12 @@
 package de.thb.mux.domain;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import de.thb.mux.domain.security.UserAccess;
 
 import javax.persistence.*;
 import java.util.Set;
 
     @Entity
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "username"})
     public class SurveyEvent {
 
         @Id
@@ -21,27 +21,34 @@ import java.util.Set;
         @OneToMany(cascade = CascadeType.ALL, mappedBy = "surveyEvent")
         private Set<SurveyUser> user;
 
+        @ManyToOne
+        @JoinColumn(name = "username")
+        private UserAccess username;
+
         public SurveyEvent(){}
 
-        public SurveyEvent(String id, String name, String description, Set<Schedule> schedules, Set<SurveyUser> surveyUsers) {
+        public SurveyEvent(String id, String name, String description, Set<Schedule> schedules, Set<SurveyUser> surveyUsers, UserAccess username) {
             this.id = id;
             this.name = name;
             this.description = description;
             this.schedules = schedules;
             this.user=surveyUsers;
+            this.username = username;
         }
 
-        public SurveyEvent(String id, String name, String description, Set<Schedule> schedules) {
+        public SurveyEvent(String id, String name, String description, Set<Schedule> schedules, UserAccess username) {
             this.id = id;
             this.name = name;
             this.description = description;
             this.schedules = schedules;
+            this.username=username;
         }
 
-        public SurveyEvent(String id, String name, String description) {
+        public SurveyEvent(String id, String name, String description, UserAccess username) {
             this.id = id;
             this.name = name;
             this.description = description;
+            this.username=username;
         }
 
         public String getId() {
@@ -82,5 +89,13 @@ import java.util.Set;
 
         public void setUser(Set<SurveyUser> user) {
             this.user = user;
+        }
+
+        public UserAccess getUsername() {
+            return username;
+        }
+
+        public void setUsername(UserAccess username) {
+            this.username = username;
         }
     }
