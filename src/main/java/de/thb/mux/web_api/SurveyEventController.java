@@ -47,11 +47,11 @@ public class SurveyEventController {
     @PostMapping(value = "",
             consumes = "application/json",
             produces = "application/json")
-    public ResponseEntity postSurveyEvents(@RequestBody SurveyEvent surveyEvent){
+    public ResponseEntity<String> postSurveyEvents(@RequestBody SurveyEvent surveyEvent){
             surveyEvent.setId(uuidService.generateUUID());
             surveyEvent.getSchedules().forEach(schedule -> schedule.setSurveyEvent(surveyEvent));
             surveyEventApi.create(surveyEvent);
-            return new ResponseEntity(HttpStatus.CREATED);
+            return new ResponseEntity<>(surveyEvent.getId(), HttpStatus.CREATED);
     }
 
     @PutMapping(value= "",
